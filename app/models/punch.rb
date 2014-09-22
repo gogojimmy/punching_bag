@@ -8,8 +8,8 @@ class Punch < ActiveRecord::Base
   default_scope { order 'punches.average_time DESC' }
   scope :combos, -> { where 'punches.hits > 1' }
   scope :jabs, -> { where hits: 1 }
-  scope :before, ->(time = nil) { where('punches.ends_at <= ?', time) unless time.nil? }
-  scope :after, ->(time = nil) { where('punches.average_time >= ?', time) unless time.nil? }
+  scope :before_by_p, ->(time = nil) { where('punches.ends_at <= ?', time) unless time.nil? }
+  scope :after_by_p, ->(time = nil) { where('punches.average_time >= ?', time) unless time.nil? }
   scope :by_timeframe, ->(timeframe, time) {
     where('punches.starts_at >= ? AND punches.ends_at <= ?', time.send("beginning_of_#{timeframe}"), time.send("end_of_#{timeframe}"))
   }
