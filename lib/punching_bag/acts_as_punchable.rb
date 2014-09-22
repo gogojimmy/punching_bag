@@ -20,7 +20,7 @@ module PunchingBag
 
     module InstanceMethods
       def hits(since=nil)
-        punches.after(since).sum(:hits)
+        punches.after_by_p(since).sum(:hits)
       end
 
       def punch(request=nil)
