@@ -13,9 +13,9 @@ class Punch < ActiveRecord::Base
   scope :by_timeframe, ->(timeframe, time) {
     where('punches.starts_at >= ? AND punches.ends_at <= ?', time.send("beginning_of_#{timeframe}"), time.send("end_of_#{timeframe}"))
   }
-  scope :by_day, ->(day) { by_timeframe :day, day }
-  scope :by_month, ->(month) { by_timeframe :month, month }
-  scope :by_year, ->(year) {
+  scope :by_day_in_pg, ->(day) { by_timeframe :day, day }
+  scope :by_month_in_pg, ->(month) { by_timeframe :month, month }
+  scope :by_year_in_pg, ->(year) {
     year = DateTime.new(year) if year.is_a? Integer
     by_timeframe :year, year
   }
